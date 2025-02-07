@@ -20,8 +20,8 @@ $trans = include($localeFile);
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><?php echo htmlspecialchars($trans['title']); ?></title>
     <link rel="stylesheet" href="css/style.css" />
-    <script src="js/script.js" defer></script>
 </head>
+<script src="js/script.js" defer></script>
 <body>
 <!-- HEADER / NAVIGATION -->
 <?php include("Model/header.php"); ?>

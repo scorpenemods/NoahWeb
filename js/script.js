@@ -12,20 +12,24 @@ document.addEventListener("DOMContentLoaded", function () {
     // DARK MODE TOGGLE
     const darkModeToggle = document.getElementById("dark-mode-toggle");
 
-    // Vérifie si l'URL correspond à la page d'accueil (index.php ou index.html ou "/")
-    const isIndexPage = window.location.pathname.endsWith("index.php") ||
-        window.location.pathname.endsWith("index.html") ||
-        window.location.pathname === "/";
+    // Détection de la page d'accueil (index.php, index.html ou "/")
+    const pathname = window.location.pathname;
+    const isIndexPage = pathname.endsWith("index.php") || pathname.endsWith("index.html") || pathname === "/";
 
-    // Sélectionne l'image uniquement si on est sur la page d'accueil
+    // Sélection de l'image uniquement si on est sur la page d'accueil
     const heroImage = isIndexPage ? document.querySelector(".hero-image img") : null;
 
+    // Fonction de mise à jour de l'image
     function updateHeroImage() {
-        // Vérifie si l'image existe avant d'essayer de modifier son src
-        if (!heroImage) return;
-        heroImage.src = document.body.classList.contains("dark-mode")
-            ? "images/indexx.png"
-            : "images/index.png";
+        if (!heroImage) {
+            console.log("heroImage element not found");
+            return;
+        }
+        if (document.body.classList.contains("dark-mode")) {
+            heroImage.src = "images/indexx.png";
+        } else {
+            heroImage.src = "images/index.png";
+        }
     }
 
     if (darkModeToggle) {
@@ -39,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 localStorage.setItem("theme", "light");
             }
 
-            // Exécute updateHeroImage uniquement si on est sur la page d'accueil
+            // Met à jour l'image uniquement sur la page d'accueil
             if (isIndexPage) {
                 updateHeroImage();
             }
@@ -51,8 +55,6 @@ document.addEventListener("DOMContentLoaded", function () {
     if (savedTheme === "dark") {
         document.body.classList.add("dark-mode");
     }
-
-    // Exécute updateHeroImage uniquement si on est sur la page d'accueil
     if (isIndexPage) {
         updateHeroImage();
     }
