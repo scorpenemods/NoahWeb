@@ -1,65 +1,68 @@
-// MENU RESPONSIVE
-const navToggle = document.getElementById("nav-toggle");
-const navLinks = document.getElementById("nav-links");
+document.addEventListener("DOMContentLoaded", function () {
+    // MENU RESPONSIVE
+    const navToggle = document.getElementById("nav-toggle");
+    const navLinks = document.getElementById("nav-links");
 
-if (navToggle) {
-    navToggle.addEventListener("click", () => {
-        navLinks.classList.toggle("active");
-    });
-}
-
-// DARK MODE TOGGLE
-const darkModeToggle = document.getElementById("dark-mode-toggle");
-
-// Vérifie si l'URL contient "index.php" ou si c'est la page d'accueil sans extension
-const isIndexPage = window.location.pathname.endsWith("index.php") || window.location.pathname === "/";
-
-// Sélection de l'image uniquement sur index.php
-const heroImage = isIndexPage ? document.querySelector(".hero-image img") : null;
-
-function updateHeroImage() {
-    if (heroImage) {
-        if (document.body.classList.contains("dark-mode")) {
-            heroImage.src = "images/indexx.png";
-        } else {
-            heroImage.src = "images/index.png";
-        }
+    if (navToggle) {
+        navToggle.addEventListener("click", () => {
+            navLinks.classList.toggle("active");
+        });
     }
-}
 
-if (darkModeToggle) {
-    darkModeToggle.addEventListener("click", () => {
-        document.body.classList.toggle("dark-mode");
+    // DARK MODE TOGGLE
+    const darkModeToggle = document.getElementById("dark-mode-toggle");
 
-        // Sauvegarde de la préférence dans le localStorage
-        if (document.body.classList.contains("dark-mode")) {
-            localStorage.setItem("theme", "dark");
-        } else {
-            localStorage.setItem("theme", "light");
-        }
+    // Vérifie si l'URL correspond à la page d'accueil (index.php ou index.html ou "/")
+    const isIndexPage = window.location.pathname.endsWith("index.php") ||
+        window.location.pathname.endsWith("index.html") ||
+        window.location.pathname === "/";
 
-        // Exécute updateHeroImage uniquement sur index.php
-        if (isIndexPage) {
-            updateHeroImage();
-        }
-    });
-}
+    // Sélectionne l'image uniquement si on est sur la page d'accueil
+    const heroImage = isIndexPage ? document.querySelector(".hero-image img") : null;
 
-// Appliquer le thème sauvegardé au chargement de la page
-window.addEventListener("load", () => {
+    function updateHeroImage() {
+        // Vérifie si l'image existe avant d'essayer de modifier son src
+        if (!heroImage) return;
+        heroImage.src = document.body.classList.contains("dark-mode")
+            ? "images/indexx.png"
+            : "images/index.png";
+    }
+
+    if (darkModeToggle) {
+        darkModeToggle.addEventListener("click", () => {
+            document.body.classList.toggle("dark-mode");
+
+            // Sauvegarde de la préférence dans le localStorage
+            if (document.body.classList.contains("dark-mode")) {
+                localStorage.setItem("theme", "dark");
+            } else {
+                localStorage.setItem("theme", "light");
+            }
+
+            // Exécute updateHeroImage uniquement si on est sur la page d'accueil
+            if (isIndexPage) {
+                updateHeroImage();
+            }
+        });
+    }
+
+    // Appliquer le thème sauvegardé au chargement de la page
     const savedTheme = localStorage.getItem("theme");
     if (savedTheme === "dark") {
         document.body.classList.add("dark-mode");
     }
 
-    // Exécute updateHeroImage uniquement sur index.php
+    // Exécute updateHeroImage uniquement si on est sur la page d'accueil
     if (isIndexPage) {
         updateHeroImage();
     }
-});
 
-// CHANGEMENT DE LANGUE
-function changeLanguage() {
-    var lang = document.getElementById("language-selector").value;
-    window.location.href = "?lang=" + lang;
-}
+    // CHANGEMENT DE LANGUE
+    const languageSelector = document.getElementById("language-selector");
+    if (languageSelector) {
+        languageSelector.addEventListener("change", function () {
+            var lang = this.value;
+            window.location.href = "?lang=" + lang;
+        });
+    }
+});

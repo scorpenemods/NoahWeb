@@ -41,8 +41,9 @@ $trans = include($localeFile);
     <section class="contact-social">
         <h2><?php echo $trans['contact_social_title']; ?></h2>
         <div class="social-links">
-            <a href="https://www.linkedin.com/in/lemaire-noah/" target="_blank">🔗 LinkedIn</a>
-            <a href="https://github.com/scorpenemods" target="_blank">🐙 GitHub</a>
+            <a href="https://www.linkedin.com/in/lemaire-noah/" target="_blank" rel="noopener noreferrer">🔗 LinkedIn</a>
+            <a href="https://github.com/scorpenemods" target="_blank" rel="noopener noreferrer">🐙 GitHub</a>
+            <a href="https://www.root-me.org/noahlemr" target="_blank" rel="noopener noreferrer">🧑‍💻 RootMe</a>
         </div>
     </section>
     <section class="contact-map">
