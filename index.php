@@ -27,7 +27,6 @@ $trans = include($localeFile);
 <?php include("Model/header.php"); ?>
 
 <!-- CONTENU PRINCIPAL -->
-<!-- CONTENU PRINCIPAL -->
 <main style="padding-bottom: 100px">
     <section class="hero">
         <div class="hero-content">
@@ -61,7 +60,6 @@ $trans = include($localeFile);
         </div>
     </section>
 </main>
-
 
 <!-- FOOTER -->
 <?php include("Model/Footer.php"); ?>

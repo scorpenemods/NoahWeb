@@ -20,6 +20,7 @@ $trans = include($localeFile);
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><?php echo htmlspecialchars($trans['cv_title']); ?></title>
     <link rel="stylesheet" href="css/style.css" />
+    <script src="js/script.js" defer></script>
 </head>
 <body>
 
@@ -27,7 +28,7 @@ $trans = include($localeFile);
 <?php include("Model/header.php"); ?>
 
 <!-- CONTENU PRINCIPAL -->
-<main>
+<main style="padding-bottom: 100px">
     <section class="cv-section">
         <h2><a href="monCV.pdf" download="MonCV.pdf"><?php echo $trans['cv_download']; ?></a></h2>
         <div class="cv-container">

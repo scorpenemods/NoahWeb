@@ -10,13 +10,20 @@ if (navToggle) {
 
 // DARK MODE TOGGLE
 const darkModeToggle = document.getElementById("dark-mode-toggle");
-const heroImage = document.querySelector(".hero-image img");
+
+// Vérifie si l'URL contient "index.php" ou si c'est la page d'accueil sans extension
+const isIndexPage = window.location.pathname.endsWith("index.php") || window.location.pathname === "/";
+
+// Sélection de l'image uniquement sur index.php
+const heroImage = isIndexPage ? document.querySelector(".hero-image img") : null;
 
 function updateHeroImage() {
-    if (document.body.classList.contains("dark-mode")) {
-        heroImage.src = "images/indexx.png";
-    } else {
-        heroImage.src = "images/index.png";
+    if (heroImage) {
+        if (document.body.classList.contains("dark-mode")) {
+            heroImage.src = "images/indexx.png";
+        } else {
+            heroImage.src = "images/index.png";
+        }
     }
 }
 
@@ -31,8 +38,10 @@ if (darkModeToggle) {
             localStorage.setItem("theme", "light");
         }
 
-        // Mise à jour de l'image
-        updateHeroImage();
+        // Exécute updateHeroImage uniquement sur index.php
+        if (isIndexPage) {
+            updateHeroImage();
+        }
     });
 }
 
@@ -43,8 +52,10 @@ window.addEventListener("load", () => {
         document.body.classList.add("dark-mode");
     }
 
-    // Mise à jour de l'image dès le chargement
-    updateHeroImage();
+    // Exécute updateHeroImage uniquement sur index.php
+    if (isIndexPage) {
+        updateHeroImage();
+    }
 });
 
 // CHANGEMENT DE LANGUE
